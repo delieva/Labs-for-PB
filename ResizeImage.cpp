@@ -9,7 +9,7 @@ int findPadding(int width);
 void imageColor();
 void getColor(char &blue, char &green, char &red);
 void putColor(char blue, char green, char red);
-void readHeader(unsigned char header[54]);
+void writeHeader(unsigned char header[54]);
 void findOldHeightAndWidth(unsigned char header[54]);
 
 using namespace std;
@@ -55,7 +55,7 @@ void resizeImage(char *inputfilename, char *outputFilename, char *resizeNumber)
 }
 
 void findNewWidthAndHeight(unsigned char header[54]) {
-	readHeader(header);
+	writeHeader(header);
 	findOldHeightAndWidth(header);
 	for (int j = 0; j < 4; j++) {
 		newWidth = width * resize;
@@ -117,7 +117,7 @@ void imageColor() {
 	}
 }
 
-void readHeader(unsigned char header[54]) {
+void writeHeader(unsigned char header[54]) {
 	for (int i = 0; i < 18; i++) {
 		ch = header[i];
 		outputFile.put(ch);
@@ -126,9 +126,9 @@ void readHeader(unsigned char header[54]) {
 
 void findOldHeightAndWidth(unsigned char header[54]) {
 	for (int i = 0; i < 4; i++) {
-		ch = header[18 + j];
-		width += ch * pow(256, j);
-		ch = header[22 + j];
-		height += ch * pow(256, j);
+		ch = header[18 + i];
+		width += ch * pow(256, i);
+		ch = header[22 + i];
+		height += ch * pow(256, i);
 	}
 }
