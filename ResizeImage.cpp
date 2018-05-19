@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include <cstdlib>
 #include <cmath>
 
 void resizeImage(char *inputfilename, char *outputFilename, char *resizeNumber);
